@@ -1,0 +1,19 @@
+name: snap_state
+description: "ultra-lightweight state management ecosystem designed to eliminate boilerplate, maximize performance with pinpoint micro-rebuilds, and bypass the limitations."
+version: 0.0.1
+homepage:
+
+environment:
+  sdk: ^3.12.0
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
