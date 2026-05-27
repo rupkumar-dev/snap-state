@@ -1,7 +1,7 @@
 name: snap_state
 description: "ultra-lightweight state management ecosystem designed to eliminate boilerplate, maximize performance with pinpoint micro-rebuilds, and bypass the limitations."
 version: 0.0.1
-homepage:
+homepage: "https://github.com/rupkumar-dev/snap-state"
 
 environment:
   sdk: ^3.12.0
