@@ -1,82 +1,72 @@
-
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:snap_state/snap_state.dart';
 
-class HomeController {
-  final points = Snap<int>(name: 'user_points', initialValue: 0);
+// ==========================================================================
+// 🏢 CONTROLLER LAYER (Pure Declarative Syntax)
+// ==========================================================================
+class WeatherController {
+  final city = Snap<String>('current_city', 'Mumbai');
 
-  late final dashboardData = AsyncSnap<String>(
-    name: 'dashboard_api',
-    executionGraph: () async {
-      await Future.delayed(const Duration(seconds: 2));
-      return "SnapState Enterprise Matrix Running Perfectly!";
-    },
-  );
+  late final weatherApi = SnapComputedAsync('weather_service', city, () async {
+    // 🎯 NO BRACKETS! Just string interpolate or use it directly as '$city'
+    final activeCity = '$city'; 
+    await Future.delayed(const Duration(seconds: 1)); 
+    return "Weather in $activeCity: 32°C - Windy";
+  });
 
-  void incrementPoints() {
-    points.value++;
+  void updateCity(String newCity) {
+    city.set(newCity); // Pure Mutation
   }
 }
 
-final homeController = HomeController();
+final weatherController = WeatherController();
 
-void main() => runApp(const MaterialApp(home: EnterpriseScreen()));
+// ==========================================================================
+// 🎨 UI PRESENTATION LAYER
+// ==========================================================================
+void main() => runApp(const MaterialApp(home: PurePropertyDashboard()));
 
-class EnterpriseScreen extends StatelessWidget {
-  const EnterpriseScreen({super.key});
+class PurePropertyDashboard extends StatelessWidget {
+  const PurePropertyDashboard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    log("❌ SYSTEM CRITICAL: Full Scaffold Shell Built!");
-
     return Scaffold(
-      appBar: AppBar(title: const Text('SnapState Pure Core Engine')),
+      appBar: AppBar(title: const Text('SnapState Pure Properties')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            
+            // 1. Sync Text: Directly referencing the object in interpolation!
             SnapCell(
-              builder: (context) {
-                log("🔵 SUCCESS: Sirf Text widget rebuild hua!");
-                return Text(
-                  'Points: ${homeController.points.value}',
-                  style: const TextStyle(
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
-                );
-              },
+              builder: (context) => Text(
+                'City: ${weatherController.city}', // <--- 🎯 EXACTLY AS YOU WANTED! No value, no ()
+                style: const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+              ),
             ),
-
+            
             const SizedBox(height: 20),
 
-            ElevatedButton(
-              onPressed: homeController.incrementPoints,
-              child: const Text('Increment State'),
+            // 2. Async Block: Clean state evaluation matching types
+            SnapCell(
+              builder: (context) {
+                return switch (weatherController.weatherApi.state) { // <--- 🎯 Clean state property
+                  SnapLoading<String>() => const CircularProgressIndicator(),
+                  SnapError<String>(error: final err) => Text('Error: $err'),
+                  SnapData<String>(data: final climate) => Text(
+                      climate,
+                      style: const TextStyle(fontSize: 20, color: Colors.deepOrange, fontWeight: FontWeight.bold),
+                    ),
+                };
+              },
             ),
 
             const SizedBox(height: 40),
-            const Divider(indent: 40, endIndent: 40),
-            const SizedBox(height: 20),
 
-            // 🎯 FIXED TYPE MATCHING: Clean pattern compile structure
-            SnapCell(
-              builder: (context) {
-                log("🟢 SUCCESS: Sirf API View Container rebuild hua!");
-                final currentState = homeController.dashboardData.state;
-
-                return switch (currentState) {
-                  SnapLoading<String>() => const CircularProgressIndicator(),
-                  SnapError<String>(error: final err) => Text('Error: $err'),
-                  SnapData<String>(data: final message) => Text(
-                    message,
-                    style: const TextStyle(fontSize: 18),
-                  ),
-                };
-              },
+            ElevatedButton(
+              onPressed: () => weatherController.updateCity('Delhi'),
+              child: const Text('Switch to Delhi'),
             ),
           ],
         ),
