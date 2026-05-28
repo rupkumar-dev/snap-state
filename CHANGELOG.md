@@ -4,6 +4,30 @@ All notable changes to the `snap_state` ecosystem will be documented in this fil
 
 ---
 
+## [1.0.0] - 2026-05-28
+
+### 🚀 Merged Ecosystem Release
+* **Unified State Management Architecture:** Merged `SnapState` and `FusionState` into a single, high-performance, boilerplate-free state management library.
+* **Signals & Derived States:**
+  * Added public `.value` typed getter to `Snap<T>` signals.
+  * Added `SnapComputed<T>` for derived synchronous computation nodes listening to multiple dependencies.
+  * Renamed `SnapComputedAsync` to `SnapAsync` and upgraded it to support listening to multiple dependencies concurrently.
+* **Controllers & Events:**
+  * Merged `FusionController` and `FusionState` into `SnapController` (extends `ChangeNotifier`, has `onInit`, `onReady`, `onClose` lifecycles).
+  * Merged `FusionEvent` into `SnapEvent<T>` (now calls `update()` to notify UI upon `emit`).
+* **Dependency Injection (DI) & Scoping:**
+  * Combined all registry code into `SnapRegistry` (with support for manual dependency injection and type lookups).
+  * Created `SnapScope` widget to replace the bugged global `FusionScope`, ensuring clean lifecycle scope tracking and localized cleanup of registered controller instances.
+* **UI Widgets:**
+  * Created explicit `SnapBuilder<T>` widget to listen and rebuild dynamically on controller notifications.
+  * Created `SnapAsyncBuilder<T>` widget to cleanly handle async loading/data/error states.
+* **Observability & Guard Utilities:**
+  * Added observer logging for controller creation and disposal lifecycles.
+  * Merged `fusionGuard` into `snapGuard`.
+  * Added `SnapLogger` with default console debug logger.
+
+---
+
 ## [0.1.0] - 2026-05-27
 
 ### 🚀 Added (The Pure Automation Era)
