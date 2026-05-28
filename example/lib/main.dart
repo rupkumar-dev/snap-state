@@ -16,7 +16,7 @@ void increment() => count.set(count.value + 1);
 void decrement() => count.set(count.value - 1);
 void reset()     => count.set(0);
 
-// ── 2. TODO LIST ───────────────────────────────────────────────────────────
+// ── 2. Todo LIST ───────────────────────────────────────────────────────────
 // Just a list in a Snap. No Cubit, no StateNotifier, no ChangeNotifier.
 final todos = Snap<List<String>>('todos', ['Buy groceries', 'Read Flutter docs']);
 final newTodoText = Snap<String>('new_todo_text', '');
@@ -431,7 +431,7 @@ class SnapShowcaseApp extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: accentColor.withOpacity(0.2)),
+        border: Border.all(color: accentColor.withValues(alpha: 0.2)),
       ),
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -464,9 +464,9 @@ class SnapShowcaseApp extends StatelessWidget {
         width: 52,
         height: 52,
         decoration: BoxDecoration(
-            color: color.withOpacity(0.12),
+            color: color.withValues(alpha: 0.12),
             shape: BoxShape.circle,
-            border: Border.all(color: color.withOpacity(0.4))),
+            border: Border.all(color: color.withValues(alpha: 0.4))),
         child: Icon(icon, color: color, size: 24),
       ),
     );
