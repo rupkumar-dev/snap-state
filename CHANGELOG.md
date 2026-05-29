@@ -3,6 +3,13 @@
 All notable changes to the `snap_state` ecosystem will be documented in this file.
 
 ---
+## 1.0.1
+
+- Update README
+- Add package logo
+-improve  license: MIT
+- Improve documentation
+
 
 ## [1.0.0] - 2026-05-28
 
