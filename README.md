@@ -11,8 +11,13 @@ It is designed for apps that want simple mutable state with fine-grained widget 
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-  
+
 ---
+<p align="center">
+  <img src="https://raw.githubusercontent.com/rupkumar-dev/REPO/main/assets/logo.svg"
+       height="120"
+       alt="SnapState Package">
+</p>
 
 ## Installation
   
