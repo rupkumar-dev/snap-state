@@ -14,7 +14,7 @@ It is designed for apps that want simple mutable state with fine-grained widget 
 
 ---
 <p align="center">
-  <img src="https://raw.githubusercontent.com/rupkumar-dev/REPO/main/assets/logo.svg"
+  <img src="https://raw.githubusercontent.com/rupkumar-dev/snap-state/main/assets/logo.svg"
        height="120"
        alt="SnapState Package">
 </p>
