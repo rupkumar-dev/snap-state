@@ -3,6 +3,12 @@
 All notable changes to the `snap_state` ecosystem will be documented in this file.
 
 ---
+## 1.0.4
+
+- Update pubs
+- Add package logo
+-remove linux,windows,mac,ios example
+
 ## 1.0.1
 
 - Update README
